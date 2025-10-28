@@ -5,7 +5,6 @@ import { LogOut, User, Settings, Trophy, CreditCard } from "lucide-react";
 
 import { Button } from "./ui/button";
 import { useQuizStore } from "@/store/store";
-import { LoginModal } from "./modals/login-modal";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -101,7 +100,6 @@ export const NavBar = () => {
         ) : (
           // User is not logged in - Show auth buttons
           <div className="flex items-center gap-2">
-            <LoginModal />
             <Button
               variant="outline"
               className="border-blue-500 text-blue-500 hover:bg-blue-50"
