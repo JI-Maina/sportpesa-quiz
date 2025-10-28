@@ -2,10 +2,10 @@
 
 import * as z from "zod";
 import Image from "next/image";
-import { RotateCw } from "lucide-react";
+import { ArrowRight, RotateCw } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useActionState, useEffect, useState, useTransition } from "react";
+import { FC, useActionState, useEffect, useState, useTransition } from "react";
 
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
@@ -28,11 +28,16 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
+import { useRouter } from "next/navigation";
 
-export const LoginModal = () => {
+type LoginProps = { title: string; path: string };
+
+export const LoginModal: FC<LoginProps> = ({ title, path }) => {
   const [open, setOpen] = useState(false);
 
-  const { setUser, user } = useQuizStore((state) => state);
+  const { setUser } = useQuizStore((state) => state);
+
+  const router = useRouter();
 
   const [state, action, isPending] = useActionState(loginUser, null);
   const [isTransitionPending, startTransition] = useTransition();
@@ -61,21 +66,29 @@ export const LoginModal = () => {
   // Handle successful login
   useEffect(() => {
     if (state?.success) {
-      // console.log(state.data);
+      console.log(state.data);
       setUser({
         nickname: state.data.nickname,
         phoneNo: state.data.phone_number,
         isAdmin: state.data.is_quiz_admin || false,
       });
       setOpen(false);
+      form.reset();
+      router.push(path);
     }
   }, [state?.success]);
 
   return (
     <Dialog open={open} onOpenChange={(value) => setOpen(value)}>
       <DialogTrigger asChild>
-        <Button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg text-lg">
-          Play Now
+        <Button
+          size="lg"
+          variant={path === "/quiz" ? "outline" : "default"}
+          className={`rounded-full text-lg px-8 py-6 hover:scale-105 transition-all ${
+            path === "/quiz" ? "border-2 border-primary-foreground/30" : ""
+          }`}
+        >
+          {title} {path !== "/quiz" && <ArrowRight className="ml-2 w-5 h-5" />}
         </Button>
       </DialogTrigger>
 

@@ -1,5 +1,8 @@
+"use server";
+
 import { loginSchema } from "@/lib/schema";
 import { handleSession } from "./session";
+import { cookies } from "next/headers";
 
 export async function loginUser(prevState: any, formData: FormData) {
   const validatedFields = loginSchema.safeParse({
@@ -35,12 +38,13 @@ export async function loginUser(prevState: any, formData: FormData) {
         message: errorData.message || "Login failed",
       };
     } else {
-      await handleSession(
-        data.accessToken,
-        data.nickname,
-        data.phone_number,
-        data.is_admin
-      );
+      await handleSession(data.accessToken);
+
+      // FIX: Look for "token" instead of "session"
+      const cookieStore = await cookies();
+      const tokenCookie = cookieStore.get("token"); // ← Changed to "token"
+      console.log("Token cookie set:", !!tokenCookie);
+      console.log("Token cookie value:", tokenCookie?.value);
 
       return { success: true, message: "Login Successful", data: data };
     }
