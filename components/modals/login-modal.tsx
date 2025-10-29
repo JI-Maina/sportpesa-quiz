@@ -74,7 +74,9 @@ export const LoginModal: FC<LoginProps> = ({ title, path }) => {
       });
       setOpen(false);
       form.reset();
+
       router.push(path);
+      router.refresh();
     }
   }, [state?.success]);
 

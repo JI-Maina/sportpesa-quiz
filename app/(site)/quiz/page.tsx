@@ -1,8 +1,11 @@
+import { getToken } from "@/actions/session";
 import { QuizCard } from "@/components/question-set-card";
 import { getQuizSets } from "@/data/quiz/get-quiz";
 
 export default async function Home() {
   const quizSets = await getQuizSets();
+
+  console.log(await getToken());
 
   return (
     <main className="min-h-screen bg-gray-50">
