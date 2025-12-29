@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { ArrowRight, TrendingUp } from "lucide-react";
 
@@ -15,7 +17,7 @@ export const HeroSection = () => {
           alt="Soccer stadium"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-secondary/95 via-secondary/90 to-primary/80" />
+        <div className="absolute inset-0 bg-linear-to-br from-secondary/95 via-secondary/90 to-primary/80" />
       </div>
 
       {/* Content */}
@@ -31,7 +33,7 @@ export const HeroSection = () => {
           <h1 className="text-5xl md:text-7xl font-bold text-primary-foreground mb-6 leading-tight">
             Tanobora. Quiz.
             <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary-glow">
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-primary to-primary-glow">
               Dominate.
             </span>
           </h1>
@@ -41,7 +43,7 @@ export const HeroSection = () => {
             with fans worldwide and prove you're the ultimate football expert.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center z-50">
             <LoginModal title="Start Predicting" path="/predictor" />
 
             <LoginModal title="Take a Quiz" path="/quiz" />
@@ -50,7 +52,7 @@ export const HeroSection = () => {
       </div>
 
       {/* Decorative Elements */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent z-10" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-linear-to-t from-background to-transparent " />
     </section>
   );
 };

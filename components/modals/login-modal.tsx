@@ -86,7 +86,7 @@ export const LoginModal: FC<LoginProps> = ({ title, path }) => {
         <Button
           size="lg"
           variant={path === "/quiz" ? "outline" : "default"}
-          className={`rounded-full text-lg px-8 py-6 hover:scale-105 transition-all ${
+          className={`rounded-full text-lg px-8 py-6 hover:scale-105 transition-all cursor-pointer ${
             path === "/quiz" ? "border-2 border-primary-foreground/30" : ""
           }`}
         >
